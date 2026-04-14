@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Relation Is Enough &mdash; TTT Essays</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <a href="/" class="nav-title">TTT</a>
+  <div class="nav-links">
+    <a href="../paper.html">Paper</a>
+    <a href="../concepts/">Concepts</a>
+    <a href="./" class="active">Essays</a>
+  </div>
+</nav>
+
+<div class="content">
+
+<a href="./" class="back-link">&larr; All essays</a>
+
+<h1>One Relation Is Enough</h1>
+<p class="author">Zach Mainen</p>
+
+<p>Every ontology in common use &ndash; BFO, DOLCE, Schema.org, the OBO Foundry &ndash; starts with a collection of primitive relations. <em>Part-of</em>, <em>instance-of</em>, <em>participates-in</em>, <em>has-quality</em>, <em>depends-on</em>. BFO has 36. DOLCE has more. Each comes with its own axioms, its own edge cases, its own arguments about whether <em>part-of</em> should be transitive across categories.</p>
+<p>We show that you need exactly one: <strong>belongs-to</strong>.</p>
+<p>Everything else &ndash; parthood, instantiation, participation, dependence, quality attribution &ndash; is belongs-to with a different quality attached. The quality tells you what <em>kind</em> of belonging it is. The relation itself is always the same.</p>
+<h2>How it works</h2>
+<p>An entity is anything that can belong to something or have something belong to it. A <em>belonging</em> is a triple: an entity (the dependent), another entity (the context it belongs to), and a quality (the kind of belonging). That&rsquo;s it. Three things.</p>
+<p>A person belongs to a meeting (quality: <em>participant</em>). A heart belongs to a body (quality: <em>part</em>). A color belongs to a surface (quality: <em>attribute</em>). A student belongs to a class (quality: <em>instance</em>). The relation is always belongs-to. The quality disambiguates.</p>
+<p>This means BFO&rsquo;s <em>part-of</em> is just belongs-to with a parthood quality. DOLCE&rsquo;s <em>quale</em> is belongs-to with a quale quality. Every one of their primitives reduces to the same single relation plus a distinguishing quality. We demonstrate this for 12 relations across both frameworks &ndash; 6 from BFO, 6 from DOLCE &ndash; and prove in Lean 4 that all 12 reductions are valid and that all 12 qualities are distinct.</p>
+<h2>The reflexive trick</h2>
+<p>Here&rsquo;s where it gets interesting. Qualities are entities. If a quality is an entity, then it can belong to things. And the quality of <em>that</em> belonging is itself a quality, which is itself an entity.</p>
+<p>This sounds like infinite regress. It isn&rsquo;t. We prove that the reflexive closure terminates at depth 1. Qualities of qualities are just qualities. The system is self-grounding: five meta-qualities (<em>instance</em>, <em>inverse</em>, <em>implies</em>, <em>transitive</em>, <em>applies-to</em>) describe the behavior of all qualities, including themselves. They form a closed grammar.</p>
+<p>This is not a philosophical convenience. It&rsquo;s a formal result: the meta-quality closure is finite, complete, and mechanically verified. No infinite tower. No external metalanguage. The system describes itself.</p>
+<h2>Social structure for free</h2>
+<p>Once you have belongings, social structure emerges without being stored. Two entities that share a context are <em>co-participants</em>. This gives you a graph &ndash; the situation graph &ndash; where edges represent shared belonging. It&rsquo;s symmetric (if A shares a context with B, B shares one with A). It&rsquo;s irreflexive (you can&rsquo;t co-participate with yourself). And it&rsquo;s grounded: every edge is witnessed by two explicit belongings.</p>
+<p>The situation graph is never stored as its own data structure. It&rsquo;s a <em>view</em> over the belongings. This is a design principle, not a shortcut: the social structure is always derivable, always consistent with the raw data, and never stale.</p>
+<h2>Why this matters for AI</h2>
+<p>Every AI system that interacts with structured data needs an ontology, whether it admits it or not. The question is whether you inherit someone else&rsquo;s 36 primitives or build from one.</p>
+<p>With one primitive, interoperability becomes trivial. Two systems that both use belongs-to can merge their data without a concept-alignment step. The quality tells you what kind of relationship it is; the structure is already shared. No mapping tables, no crosswalks, no ontology alignment workshops.</p>
+<p>With reflexive grounding, the system can reason about its own structure without a separate metalanguage. A policy that says &ldquo;this entity type requires approval before modification&rdquo; is itself a belonging &ndash; a policy belongs to a domain with a governance quality. The system that enforces the policy is described by the same ontology as the data it governs.</p>
+<blockquote>
+<p>One relation. Everything else is a quality of that relation. The simplicity is not a limitation &ndash; it is the point.</p>
+</blockquote>
+<hr />
+<p>All results mechanically verified in Lean 4: 5 modules, 12 reductions, reflexive closure termination, meta-quality completeness. Zero sorry axioms. Full details in &ldquo;Belongs-To and Nothing Else: A Single-Primitive Relational Ontology&rdquo; (Mainen 2026).</p>
+
+</div>
+
+<footer class="site-footer">
+  &copy; 2026 Zach Mainen
+</footer>
+
+</body>
+</html>
